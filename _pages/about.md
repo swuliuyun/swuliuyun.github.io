@@ -12,7 +12,7 @@ redirect_from:
 
 # Publications
 ##  2025
-- **Yun Liu**, X. Wang, E. Hu, A. Wang, B. Shiri, W. Lin. VNDHR: Variational Single Nighttime Image Dehazing for Enhancing Visibility in  Intelligent Transportation Systems via Hybrid Regularization IEEE Transactions on Intelligent Transportation Systems (T-ITS). 2025. (CCF-B) 
+- **Yun Liu**, X. Wang, E. Hu, A. Wang, B. Shiri, W. Lin. VNDHR: Variational Single Nighttime Image Dehazing for Enhancing Visibility in Intelligent Transportation Systems via Hybrid Regularization. IEEE Transactions on Intelligent Transportation Systems (T-ITS). 2025. (CCF-B) 
 - X. Wang, G. Yang, T. Ye, **Yun Liu***. Dehaze-RetinexGAN: Real-World Image Dehazing via Retinex-based Generative Adversarial Network.  Proceedings of the 39th Annual AAAI Conference on Artificial Intelligence (AAAI). 2025. (CCF-A, Corresponding author)
 - E. Chen, L. Tong, T. Ye, S. Chen, Y. Zhang, **Yun Liu***. Mutual learning for domain adaptation: Self-distillation image dehazing network with sample-cycle. Displays, 2025, 87: 102904. (JCR-2, Corresponding author)
   
