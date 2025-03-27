@@ -12,6 +12,7 @@ redirect_from:
 
 # Publications
 ##  2025
+- T. Li, **Yun Liu***, W, Ren, B. Shiri, W. Lin. Single Image Dehazing Using Fuzzy Region Segmentation and Haze Density Decomposition. IEEE Transactions on Circuits and Systems for Video Technology (T-CSVT). 2025. (CCF-B)
 - **Yun Liu**, X. Wang, E. Hu, A. Wang, B. Shiri, W. Lin. VNDHR: Variational Single Nighttime Image Dehazing for Enhancing Visibility in Intelligent Transportation Systems via Hybrid Regularization. IEEE Transactions on Intelligent Transportation Systems (T-ITS). 2025. (CCF-B) 
 - X. Wang, G. Yang, T. Ye, **Yun Liu***. Dehaze-RetinexGAN: Real-World Image Dehazing via Retinex-based Generative Adversarial Network.  Proceedings of the 39th Annual AAAI Conference on Artificial Intelligence (AAAI). 2025. (CCF-A, Corresponding author)
 - E. Chen, L. Tong, T. Ye, S. Chen, Y. Zhang, **Yun Liu***. Mutual learning for domain adaptation: Self-distillation image dehazing network with sample-cycle. Displays, 2025, 87: 102904. (JCR-2, Corresponding author)
@@ -23,7 +24,7 @@ redirect_from:
 
 ##  2023
 - **Yun Liu**, Z. Yan, S. Chen, T. Ye, W. Ren, E. Chen. NightHazeFormer: Single Nighttime Haze Removal Using Prior Query Transformer. Proceedings of the 31st ACM International Conference on Multimedia (ACM MM '23). 2023: 4119-4128. (CCF-A)
-- **Yun Liu**, Z. Yan, J. Tan, Y. Li. Multi-purpose Oriented Single Nighttime Image Haze Removal Based on Unified Variational Retinex Model. IEEE Transactions on Circuits and Systems for Video Technology (TCSVT), 2023, 33(4): 1643-1657. (CCF-B, ESI Highly Cited & Hot Paper)
+- **Yun Liu**, Z. Yan, J. Tan, Y. Li. Multi-purpose Oriented Single Nighttime Image Haze Removal Based on Unified Variational Retinex Model. IEEE Transactions on Circuits and Systems for Video Technology (T-CSVT), 2023, 33(4): 1643-1657. (CCF-B, ESI Highly Cited & Hot Paper)
 - T. Ye, S. Chen, **Yun Liu***, W. Chai, J. Bai, W. Zou, Y. Zhang, M. Jiang, E. Chen, C. Xue. Sequential Affinity Learning for Video Restoration. Proceedings of the 31st ACM International Conference on Multimedia (ACM MM '23). 2023: 4147-4156. (CCF-A, Corresponding author)
 - T. Ye, S. Chen, J. Bai, J. Shi, C. Xue, J. Jiang, J. Yin, E. Chen, **Yun Liu***. Adverse Weather Removal with Codebook Priors. Proceedings of the IEEE/CVF international conference on computer vision (ICCV). 2023: 12653-12664.  (CCF-A, Corresponding author)
 - S. Chen#, T. Ye#, **Yun Liu#**, T. Liao, J. Jiang, E. Chen, P. Chen. MSP-former: Multi-scale Projection Transformer for Single Image Desnowing. Proceedings of the IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP). 2023: 1-5. (CCF-B, co-first author)
