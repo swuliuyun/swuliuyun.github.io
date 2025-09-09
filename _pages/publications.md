@@ -4,7 +4,6 @@ title: "Publications"
 permalink: /publications/
 author_profile: true
 ---
-# Publications
 
 ##  2025
 - T. Li, **Yun Liu***, W, Ren, B. Shiri, W. Lin. Single Image Dehazing Using Fuzzy Region Segmentation and Haze Density Decomposition. IEEE Transactions on Circuits and Systems for Video Technology (T-CSVT). 2025. (CCF-B, Corresponding author)
