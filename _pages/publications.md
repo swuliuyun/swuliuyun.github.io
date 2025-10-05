@@ -6,7 +6,8 @@ author_profile: true
 ---
 
 ##  2025
-- T. Li, **Yun Liu***, W, Ren, B. Shiri, W. Lin. Single Image Dehazing Using Fuzzy Region Segmentation and Haze Density Decomposition. IEEE Transactions on Circuits and Systems for Video Technology (T-CSVT). 2025. (CCF-B, Corresponding author)
+- T. Li, **Yun Liu***, S. Luo, W, Ren, W. Lin. Real-World Nighttime Dehazing via Score-Guided Multi-Scale Fusion and Dual-Channel Enhancement. IEEE Transactions on Circuits and Systems for Video Technology (T-CSVT). 2025. (CCF-B, Corresponding author)
+- T. Li, **Yun Liu***, W, Ren, B. Shiri, W. Lin. Single Image Dehazing Using Fuzzy Region Segmentation and Haze Density Decomposition. IEEE Transactions on Circuits and Systems for Video Technology (T-CSVT). 2025, 35(10):9964-9978. (CCF-B, Corresponding author)
 - **Yun Liu**, X. Wang, E. Hu, A. Wang, B. Shiri, W. Lin. VNDHR: Variational Single Nighttime Image Dehazing for Enhancing Visibility in Intelligent Transportation Systems via Hybrid Regularization. IEEE Transactions on Intelligent Transportation Systems (T-ITS). 2025, 26(7): 10189-10203. (CCF-B) 
 - X. Wang, G. Yang, T. Ye, **Yun Liu***. Dehaze-RetinexGAN: Real-World Image Dehazing via Retinex-based Generative Adversarial Network.  Proceedings of the 39th Annual AAAI Conference on Artificial Intelligence (AAAI). 2025, 39(8): 7997-8005 (CCF-A, Corresponding author)
 - E. Chen, L. Tong, T. Ye, S. Chen, Y. Zhang, **Yun Liu***. Mutual learning for domain adaptation: Self-distillation image dehazing network with sample-cycle. Displays, 2025, 87: 102904. (JCR-2, Corresponding author)
