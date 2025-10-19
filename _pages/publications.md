@@ -6,6 +6,7 @@ author_profile: true
 ---
 
 ##  2025
+- E Hu, **Yun Liu***, A. Wang, B. Shiri, W. Ren, W. Lin. Low-Light Image Enhancement Using a Retinex-based Variational Model with Weighted Lp Norm Constraint. IEEE Transactions on Multimedia (T-MM), 2025. (CCF-B, Corresponding author)
 - T. Li, **Yun Liu***, S. Luo, W, Ren, W. Lin. Real-World Nighttime Dehazing via Score-Guided Multi-Scale Fusion and Dual-Channel Enhancement. IEEE Transactions on Circuits and Systems for Video Technology (T-CSVT). 2025. (CCF-B, Corresponding author)
 - T. Li, **Yun Liu***, W, Ren, B. Shiri, W. Lin. Single Image Dehazing Using Fuzzy Region Segmentation and Haze Density Decomposition. IEEE Transactions on Circuits and Systems for Video Technology (T-CSVT). 2025, 35(10):9964-9978. (CCF-B, Corresponding author)
 - **Yun Liu**, X. Wang, E. Hu, A. Wang, B. Shiri, W. Lin. VNDHR: Variational Single Nighttime Image Dehazing for Enhancing Visibility in Intelligent Transportation Systems via Hybrid Regularization. IEEE Transactions on Intelligent Transportation Systems (T-ITS). 2025, 26(7): 10189-10203. (CCF-B) 
