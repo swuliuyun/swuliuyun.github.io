@@ -1,848 +1,401 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Zudi Lin</title>
-  <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-  <link rel="shortcut icon" type="image/x-icon" href="images/misc/favicon.png">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <!-- Bulma Version 0.7.5-->
-  <link rel="stylesheet" href="https://unpkg.com/bulma@0.7.5/css/bulma.min.css" />
-  <link href='css/style.css?_t=20200916' rel='stylesheet' type='text/css'>
-  <script defer src="font-awesome/js/brands.min.js"></script>
-  <script defer src="font-awesome/js/regular.min.js"></script>
-  <script defer src="font-awesome/js/fontawesome.min.js"></script>
-    <style>
-      .red {
-        color: rgb(238, 76, 44);
-        font-style: normal;
-      }
-      .blue {
-        color: rgb(238, 76, 44);
-        font-style: normal;
-      }
-       
-      #intro {
-       margin-top: 0em !important;
-      }
-      
-      .content h3 {
-       margin-bottom: 1em!important;
-       margin-top: 2em!important;
-      }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Guang Yang | AI Researcher — Open to PhD/Intern</title>
+  <style>
+    /* ---- Tech Dark Theme (single theme) ---- */
+    :root{
+      --bg:#0b0f14;       /* deep space */
+      --panel:#0f1720;    /* card bg */
+      --text:#d6e2ff;     /* soft ice */
+      --muted:#8aa0bf;    /* slate */
+      --accent:#66d9ff;   /* neon cyan */
+      --accent-2:#8b6cff; /* neon violet */
+      --accent-3:#3df0b2; /* neon green */
+      --glow: 0 0 16px rgba(102,217,255,.45), 0 0 34px rgba(139,108,255,.25);
+      --bd:1px solid rgba(120,160,220,.18);
+    }
+    html,body{height:100%}
+    *{box-sizing:border-box}
+    body{
+      margin:0; padding:0; background:var(--bg); color:var(--text);
+      font-family:"Inter","Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+      display:flex; min-height:100vh; flex-direction:row; line-height:1.65;
+      overflow-x:hidden;
+    }
 
-      .content figure {
-       width: 90%;
-       display: flex;
-       align-items: center;
-       overflow: hidden;
-       margin-left: auto!important;
-       margin-right: auto!important;
-      }
-      
-      .columns:not(:last-child) {
-       margin-bottom: 1.75rem!important;
-      }
+    /* Background grid + flowing gradient */
+    .bg-grid{ position:fixed; inset:0; z-index:0; pointer-events:none; }
+    .bg-grid::before{
+      content:""; position:absolute; inset:0;
+      background-image:linear-gradient(rgba(120,150,200,.06) 1px, transparent 1px),
+                       linear-gradient(90deg, rgba(120,150,200,.06) 1px, transparent 1px);
+      background-size:32px 32px, 32px 32px;
+      mask-image:radial-gradient(80% 60% at 50% 40%, black 60%, transparent 100%);
+    }
+    .bg-grid::after{
+      content:""; position:absolute; inset:-20%;
+      background:conic-gradient(from 180deg at 50% 50%,
+                 rgba(102,217,255,.10), rgba(139,108,255,.08), rgba(61,240,178,.08), rgba(102,217,255,.10));
+      filter:blur(60px); opacity:.6; animation:spin 22s linear infinite;
+    }
+    @keyframes spin{ to{ transform:rotate(1turn) } }
 
-      #sidebar {
-        width: 75%;
-      }
+    /* Top command bar */
+    .topbar{
+      position:fixed; top:18px; left:50%; transform:translateX(-50%);
+      display:flex; gap:10px; z-index:3; backdrop-filter:blur(8px);
+      background:linear-gradient(180deg, rgba(20,30,45,.55), rgba(20,30,45,.35));
+      border:var(--bd); border-radius:14px; padding:10px 12px; box-shadow:var(--glow);
+      align-items:center;
+    }
+    .topbar a{
+      text-decoration:none; color:var(--text); font-weight:600; font-size:14px;
+      padding:8px 12px; border-radius:10px; border:1px solid rgba(120,160,220,.22);
+      background:linear-gradient(180deg, rgba(70,120,200,.15), rgba(70,120,200,.05));
+      transition:transform .12s ease, box-shadow .12s ease, border-color .2s ease;
+    }
+    .topbar a:hover{ transform:translateY(-1px); box-shadow:0 6px 24px rgba(102,217,255,.15); }
+    .topbar a.primary{ color:#07141a; background:linear-gradient(180deg, var(--accent), #3fb9e0); border-color:rgba(102,217,255,.75) }
 
-      @media screen and (min-width: 769px), print {
-        .column.is-2_5, .column.is-2-tablet {
-          flex: none;
-          width: 20%;
-        }
-      }
-</style>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    .lang-btn{
+      font-weight:700; border:none; cursor:pointer; font-size:14px; color:var(--text);
+      padding:8px 12px; border-radius:10px; margin-left:6px;
+      background:linear-gradient(180deg, rgba(60,90,150,.22), rgba(60,90,150,.10));
+      border:1px solid rgba(120,160,220,.28);
+    }
+    .lang-btn:hover{ transform:translateY(-1px); box-shadow:0 6px 24px rgba(139,108,255,.18) }
+
+    /* Layout */
+    aside{
+      width:320px; z-index:1; padding:120px 24px 42px; position:relative; border-right:var(--bd);
+      background:linear-gradient(180deg, rgba(15,23,32,.86), rgba(15,23,32,.72));
+    }
+    main{ flex:1; max-width:1040px; padding:120px 56px 48px; z-index:1; }
+
+    /* Profile */
+    .avatar{ width:160px; height:160px; border-radius:50%; object-fit:cover; border:2px solid var(--accent);
+             box-shadow:0 0 0 3px rgba(102,217,255,.12), 0 18px 42px rgba(0,0,0,.5); }
+    .name{ font-size:26px; margin:14px 0 6px; text-shadow:0 0 18px rgba(102,217,255,.35); }
+    .role{ font-size:14px; color:var(--muted); margin:0 0 8px }
+    .badge-open{ display:inline-block; font-size:12px; padding:2px 10px; border-radius:999px; margin-top:6px;
+                 color:#061a14; background:linear-gradient(180deg, var(--accent-3), #1fbe89); border:1px solid rgba(61,240,178,.65); box-shadow:var(--glow) }
+    .links a{ display:block; margin:8px 0; padding:8px 10px; border-radius:10px; text-decoration:none; color:var(--text);
+              border:1px solid rgba(120,160,220,.22); background:linear-gradient(180deg, rgba(60,90,150,.18), rgba(60,90,150,.08)); }
+    .links a:hover{ transform:translateY(-1px); box-shadow:0 6px 24px rgba(139,108,255,.18) }
+
+    /* Sections */
+    h3{
+      margin:32px 0 14px; padding-bottom:8px; border-bottom:1px dashed rgba(120,160,220,.28);
+      font-size:20px; letter-spacing:.2px;
+    }
+    .card{ background:linear-gradient(180deg, rgba(20,30,45,.75), rgba(20,30,45,.55)); border:var(--bd);
+           border-left:2px solid var(--accent); border-radius:14px; padding:14px 16px; margin:14px 0; box-shadow:var(--glow) }
+    .meta{ font-size:14px; color:var(--muted) }
+    .badges{margin:6px 0 2px}
+    .badge{ display:inline-block; font-size:12px; padding:2px 8px; border-radius:999px; margin-right:6px;
+            background:rgba(102,217,255,.12); color:var(--accent); border:1px solid rgba(102,217,255,.35) }
+
+    .btn-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:6px }
+    .btn{ text-decoration:none; color:var(--text); border:1px solid rgba(120,160,220,.25); padding:8px 12px; border-radius:10px;
+          background:linear-gradient(180deg, rgba(60,90,150,.18), rgba(60,90,150,.08)); font-size:14px }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 6px 24px rgba(102,217,255,.18) }
+
+    footer{margin:36px 0 0; font-size:13px; color:var(--muted); text-align:center}
+
+    /* Smooth anchor scroll */
+    html{ scroll-behavior:smooth }
+
+    /* Mouse glow */
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none; z-index:1;
+      background: radial-gradient(420px circle at var(--mx) var(--my), rgba(102,217,255,.16) 0%, rgba(139,108,255,.10) 26%, transparent 55%);
+      mix-blend-mode:screen; filter:blur(10px);
+    }
+
+    @media (max-width:980px){
+      body{flex-direction:column}
+      aside{width:100%; border-right:none; border-bottom:var(--bd); padding-top:100px}
+      main{padding:24px 16px}
+      .topbar{ top:12px; }
+    }
+  </style>
 </head>
-
-
 <body>
-  <section class="section">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-2_5">
-          <div class="sticky">
-            <figure class="image" style="width: 11.6rem; margin-top: 6px;">
-              <img src="images/misc/profile.jpg">
-            </figure>
-            <div class="content">
-              <h2 style="margin-top: 1em">Zudi Lin</h2>
-              <p>
-                <b>Amazon</b><br/> 
-                55 Pier 4 Boulevard<br/> 
-                Boston, MA 02210
-              </p>
-            </div>
-            <!-- social network icons -->
-            <div class="social">
-              <a href="https://github.com/zudi-lin" target="_blank">
-                <span class="fab fa-github fa-2x" style="display:inline; text-decoration: none; color: #4a4a4a;"></span>
-              </a>
-              <a href="https://scholar.google.com/citations?user=xYh5BEIAAAAJ" target="_blank">
-                <span class="fab fa-google fa-2x" style="display:inline; text-decoration: none; color: #4a4a4a; margin-left: 15px"></span>
-              </a>
-              <a href="https://www.linkedin.com/in/zudi-lin/" target="_blank">
-                <span class="fab fa-linkedin fa-2x" style="display:inline; text-decoration: none; color: #4a4a4a; margin-left: 15px"></span>
-              </a>
-              <a href="mailto:linzudi@gmail.com" target="_blank">
-                <span class="fa-regular fa-envelope fa-2x" style="display:inline; text-decoration: none; color: #4a4a4a; margin-left: 15px"></span>
-              </a>
-            </div>
+  <div class="bg-grid"></div>
 
+  <!-- Top command buttons: Publications / CV / Contact -->
+  <nav class="topbar" aria-label="Primary">
+    <a href="#publications"><span data-i18n="nav.publications">Publications</span></a>
+    <a class="primary" href="/CV_GuangYang.pdf" target="_blank"><span data-i18n="nav.cv">CV</span></a>
+    <a href="#contact"><span data-i18n="nav.contact">Contact</span></a>
+    <button id="langToggle" class="lang-btn" aria-label="Toggle language">🌐 中文</button>
+  </nav>
 
-            <div id="sidebar" class="menu sticky is-hidden-mobile">
-              <!-- <p class="menu-label"><b>Quick Links</b></p> -->
-              <ul class="menu-list">
-                <li><a href="#intro">About Me</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#awards">Awards</a></li>
-                <li><a href="#services">Services</a></li>
-              </ul>
-            </div>
-          </div>
-
-
-
-        </div>
-        <div class="column right-panel">
-          <div class="content">
-
-
-            <!--About Me-->
-            <h2 id="intro">About Me</h2>
-            <p>
-              I am a <b>Senior Applied Scientist</b> at Amazon. I obtained my Ph.D. in Computer Science in 2022 from the John A. Paulson School of Engineering and
-              Applied Sciences at <a href="https://www.harvard.edu/" target="_blank">Harvard University</a>, advised by Prof. <a href="https://vcg.seas.harvard.edu/people" target="_blank">Hanspeter Pfister</a>.
-              I also worked closely with Prof. <a href="https://lichtmanlab.fas.harvard.edu/people/jeff-lichtman" target="_blank">Jeff W. Lichtman</a>.
-              I obtained M.S. in Computer Science from <a href="https://www.harvard.edu/" target="_blank">Harvard University</a> in 2020 and 
-              B.S. in Biological Science from <a href="https://www.tsinghua.edu.cn/en/" target="_blank">Tsinghua University</a> in 2017.
-            </p>
-
-            <p>
-              I am interested in deep learning, with applications in audio, computer vision, and neuroscience. My current work 
-              focuses on understanding speech and acoustic events.
-              My previous research topics include semantic and instance segmentation, active learning, unsupervised learning, 
-              and the analysis of comprehensive neuron connectivity in microscopy images of animal brains. I am the author of 
-              <img src="images/misc/pytc.png" alt="PyTC" width="23" height="20" style="vertical-align:middle"> 
-              <a href="https://connectomics.readthedocs.io/" target="_blank">PyTorch Connectomics</a>.
-            </p>
-            
-
-            <!--Experience-->
-            <h2 id="experience" style="margin-bottom: 25px;">Experience</h2>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/misc/amazon.png" class="img-logo">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p style="margin-bottom: 7px;">
-                    <b>Sr. Applied Scientist</b> | Amazon<br>
-                    Time: Jul 2025 - Present.
-                  </p>
-                  <p>
-                    <b>Applied Scientist II</b> | Amazon<br>
-                    Time: Jun 2022 - Jun 2025.
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/misc/harvard.png" class="img-logo">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Research Assistant</b> | School of Engineering and Applied Sciences, Harvard University<br>
-                    Time: Aug 2017 - Jun 2022. Advisor: Prof. <a href="https://vcg.seas.harvard.edu/people" target="_blank">Hanspeter Pfister</a>  
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/misc/aws.jpeg" class="img-logo">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Applied Scientist Intern</b> | Amazon Web Services (AWS)<br>
-                    Time: May 2021 - Sep 2021. Mentor: Dr. <a href="https://scholar.google.com/citations?user=HmnRFhgAAAAJ&hl=en" target="_blank">Erhan Bas</a>  
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/misc/merl.png" class="img-logo">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Research Intern</b> | Mitsubishi Electric Research Laboratories (MERL)<br>
-                    Time: May 2019 - Aug 2019. Mentor: Dr. <a href="https://scholar.google.com/citations?user=2yqx3oIAAAAJ&hl=en" target="_blank">Ziming Zhang</a>  
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <!--Publications-->
-            <h2 id="publications">
-              Publications
-              <span style="font-size: 1rem;margin-left: 1rem;position: relative;bottom: .2rem;">
-                <a href="https://scholar.google.com/citations?user=xYh5BEIAAAAJ" target="_blank" style="font-size: 22px;">
-                  [Google Scholar]
-                </a>
-                <a href="https://dblp.org/pid/245/9022.html" target="_blank" style="font-size: 22px;">
-                  [DBLP]
-                </a>
-              </span>
-            </h2>
-
-            <!--List of publications-->
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/han2024multiplexed.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Multiplexed Volumetric CLEM enabled by scFvs Provides Insights into the Cytology of Cerebellar Cortex</b><br>
-                    Xiaomeng Han, Xiaotang Lu, Peter H Li, Shuohong Wang, Richard Schalek, Yaron Meirovitch, <b>Zudi Lin</b>, Jason Adhinarta,
-                    Karl D Murray, Leah M MacNiven, Daniel R Berger, Yuelong Wu, Tao Fang, Elif Sevde Meral, Shadnan Asraf, Hidde Ploegh,
-                    Hanspeter Pfister, Donglai Wei, Viren Jain, James S Trimmer, Jeff W. Lichtman<br>
-                    <i><b>Nature Communications</b>, 2024</i><br>
-                    <a href="https://www.nature.com/articles/s41467-024-50411-z" target="_blank">[Paper]</a>
-                    <a href="https://www.biorxiv.org/content/10.1101/2023.05.20.540091v4" target="_blank">[bioRxiv]</a>
-                    - <span class="fa-regular fa-newspaper" style="display:inline; text-decoration: none; color: #4a4a4a"></span>
-                    <a href="https://news.harvard.edu/gazette/story/newsplus/new-study-pairs-immunolabeling-with-connectomic-data/" target="_blank">[Harvard Gazette]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/shapson2021connectomics.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>A Petavoxel Fragment of Human Cerebral Cortex Reconstructed at Nanoscale Resolution</b><br>
-                    Alexander Shapson-Coe, Michał Januszewski, Daniel R Berger, Art Pope, Yuelong Wu, Tim Blakely, Richard L Schalek, Peter H Li,
-                    Shuohong Wang, Jeremy Maitin-Shepard, Neha Karlupia, Sven Dorkenwald, Evelina Sjostedt, Laramie Leavitt, Dongil Lee, Jakob Troidl,
-                    Forrest Collman, Luke Bailey, Angerica Fitzmaurice, Rohin Kar, Benjamin Field, Hank Wu, Julian Wagner-Carena, David Aley,
-                    Joanna Lau, <b>Zudi Lin</b>, Donglai Wei, Hanspeter Pfister, Adi Peleg, Viren Jain, and Jeff W. Lichtman<br>
-                    <i><b>Science</b>, 2024</i><br>
-                    <a href="https://www.science.org/doi/abs/10.1126/science.adk4858" target="_blank">[Paper]</a>
-                    <a href="https://h01-release.storage.googleapis.com/landing.html" target="_blank">[Dataset]</a>
-                    - <span class="fa-regular fa-newspaper" style="display:inline; text-decoration: none; color: #4a4a4a"></span>
-                    <a href="https://amp.cnn.com/cnn/2024/05/15/world/human-brain-map-harvard-google-scn" target="_blank">[CNN]</a>
-                    <a href="https://www.nature.com/articles/d41586-024-01387-9" target="_blank">[Nature]</a>
-                    <a href="https://ai.googleblog.com/2021/06/a-browsable-petascale-reconstruction-of.html" target="_blank">[Google AI Blog]</a>
-                    <a href="https://www.technologyreview.com/2021/08/25/1031458/scientific-mysteries-human-brain/" target="_blank">[MIT Tech Review]</a>
-                    <a href="https://www.scientificamerican.com/article/mapping-the-brain-to-understand-the-mind/" target="_blank">[Scientific American]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/lin2023structure.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Structure-Preserving Instance Segmentation via Skeleton-Aware Distance Transform</b><br>
-                    <b>Zudi Lin</b>, Donglai Wei, Aarush Gupta, Xingyu Liu, Deqing Sun, and Hanspeter Pfister<br>
-                    <i>Medical Image Computing and Computer Assisted Interventions (<b>MICCAI</b>), 2023</i><br>
-                    <a href="https://link.springer.com/chapter/10.1007/978-3-031-43898-1_51" target="_blank">[Paper]</a>
-                    <a href="https://arxiv.org/abs/2310.05262" target="_blank">[arXiv]</a>
-                    <a href="https://github.com/zudi-lin/pytorch_connectomics/blob/master/connectomics/data/utils/data_transform.py" target="_blank">[Code]</a><br>
-                    <em class="blue"><b>Oral Presentation</b></em>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/velicky2022saturated.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Dense 4D Nanoscale Reconstruction of Living Brain Tissue</b><br>
-                    Philipp Velicky, Eder Miguel, Julia M. Michalska, Julia Lyudchik, Donglai Wei, 
-                    <b>Zudi Lin</b>, Jake F. Watson, Jakob Troidl, Johanna Beyer, Yoav Ben-Simon, Christoph Sommer,
-                    Wiebke Jahr, Alban Cenameri, Johannes Broichhagen, Seth G. N. Grant, Peter Jonas,
-                    Gaia Novarino, Hanspeter Pfister, Bernd Bickel, and Johann G. Danzl<br>
-                    <i><b>Nature Methods</b>, 2023</i><br>
-                    <a href="https://www.nature.com/articles/s41592-023-01936-6" target="_blank">[Paper]</a>
-                    <a href="https://www.biorxiv.org/content/10.1101/2022.03.16.484431v2" target="_blank">[bioRxiv]</a>
-                    <a href="https://github.com/danzllab/LIONESS" target="_blank">[Code]</a>
-                    - <span class="fa-regular fa-newspaper" style="display:inline; text-decoration: none; color: #4a4a4a"></span>
-                    <a href="https://www.news-medical.net/news/20230710/LIONESS-A-new-tool-for-unraveling-mysteries-of-the-brain.aspx" target="_blank">[The Medical News]</a>
-                    <a href="https://bioengineer.org/lioness-redefines-brain-tissue-imaging/" target="_blank">[Bioengineer.org]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/franco2023current.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Current Progress and Challenges in Large-scale 3D Mitochondria Instance Segmentation</b><br>
-                    Daniel Franco-Barranco,  <b>Zudi Lin</b>, Won-Dong Jang, Xueying Wang, Qijia Shen, Wenjie Yin, Yutian Fan,
-                    Mingxing Li, Chang Chen, Zhiwei Xiong, Rui Xin, Hao Liu, Huai Chen, Zhili Li, Jie Zhao, Xuejin Chen, Constantin Pape,
-                    Ryan Conrad, Jozefus De Folter, Luke Nightingale, Martin Jones, Yanling Liu, Dorsa Ziaei, Stephan Huschauer,
-                    Ignacio Arganda-Carreras, Hanspeter Pfister, and Donglai Wei<br>
-                    <i>IEEE Transactions on Medical Imaging (<b>TMI</b>), 2023</i><br>
-                    <a href="https://ieeexplore.ieee.org/document/10266382" target="_blank">[Paper]</a>
-                    <a href="https://www.techrxiv.org/articles/preprint/Current_Progress_and_Challenges_in_Large-scale3D_Mitochondria_Instance_Segmentation/22116785" target="_blank">[TechRxiv]</a>
-                    <a href="https://github.com/danifranco/TIMISE" target="_blank">[Code]</a>
-                    - <span class="fa-regular fa-chess-knight" style="display:inline; text-decoration: none; color: #4a4a4a"></span>
-                    <a href="https://mitoem.grand-challenge.org/" target="_blank">[Grand Challenge]</a><br>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/huang2023domain.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Domain-Scalable Unpaired Image Translation via Latent Space Anchoring</b><br>
-                    Siyu Huang, Jie An, Donglai Wei, <b>Zudi Lin</b>, Jiebo Luo, and Hanspeter Pfister<br>
-                    <i>IEEE Transactions on Pattern Analysis and Machine Intelligence (<b>T-PAMI</b>), 2023</i><br>
-                    <a href="https://ieeexplore.ieee.org/document/10158033" target="_blank">[Paper]</a>
-                    <a href="https://github.com/siyuhuang/Latent-Space-Anchoring" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/lauenburg2023domain.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>3D Domain Adaptive Instance Segmentation via Cyclic Segmentation GANs</b><br>
-                    Leander Lauenburg, <b>Zudi Lin</b>, Ruihan Zhang, M&aacutercia dos Santos, Siyu Huang, Ignacio Arganda-Carreras,
-                    Edward S. Boyden, Hanspeter Pfister, and Donglai Wei<br>
-                    <i>IEEE Journal of Biomedical and Health Informatics (<b>J-BHI</b>), 2023</i><br>
-                    <a href="https://ieeexplore.ieee.org/document/10138543" target="_blank">[Paper]</a>
-                    <a href="https://arxiv.org/abs/2204.03082" target="_blank">[arXiv]</a>
-                    <a href="https://connectomics-bazaar.github.io/proj/CySGAN/index.html" target="_blank">[Project Page]</a>
-                    <a href="https://github.com/zudi-lin/pytorch_connectomics/tree/master/projects/CySGAN" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/zhao2023cddfuse.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>CDDFuse: Correlation-Driven Dual-Branch Feature Decomposition for Multi-Modality Image Fusion</b><br>
-                    Zixiang Zhao, Haowen Bai, Jiangshe Zhang, Yulun Zhang, Shuang Xu,  <b>Zudi Lin</b>, Radu Timofte, and Luc Van Gool<br>
-                    <i>Computer Vision and Pattern Recognition (<b>CVPR</b>), 2023</i><br>
-                    <a href="https://openaccess.thecvf.com/content/CVPR2023/html/Zhao_CDDFuse_Correlation-Driven_Dual-Branch_Feature_Decomposition_for_Multi-Modality_Image_Fusion_CVPR_2023_paper.html" target="_blank">[Paper]</a>
-                    <a href="https://arxiv.org/abs/2211.14461" target="_blank">[arXiv]</a>
-                    <a href="https://github.com/Zhaozixiang1228/MMIF-CDDFuse" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/lin2023reco.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Relaxing Contrastiveness in Multimodal Representation Learning</b><br>
-                    <b>Zudi Lin</b>, Erhan Bas, Kunwar Yashraj Singh, Gurumurthy Swaminathan, and Rahul Bhotika<br>
-                    <i>Winter Conference on Applications of Computer Vision (<b>WACV</b>), 2023</i><br>
-                    <a href="https://openaccess.thecvf.com/content/WACV2023/html/Lin_Relaxing_Contrastiveness_in_Multimodal_Representation_Learning_WACV_2023_paper.html" target="_blank">[Paper]</a>
-                    <a href="https://www.amazon.science/publications/relaxing-contrastiveness-in-multimodal-representation-learning" target="_blank">[Amazon Science]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/cai2022mst++.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>MST++: Multi-stage Spectral-wise Transformer for Efficient Spectral Reconstruction</b><br>
-                    Yuanhao Cai, Jing Lin, <b>Zudi Lin</b>, Haoqian Wang, Yulun Zhang, Hanspeter Pfister, Radu Timofte, and Luc Van Gool<br>
-                    <i>Computer Vision and Pattern Recognition Workshops (<b>CVPRW</b>), 2022</i><br>
-                    <a href="https://openaccess.thecvf.com/content/CVPR2022W/NTIRE/papers/Cai_MST_Multi-Stage_Spectral-Wise_Transformer_for_Efficient_Spectral_Reconstruction_CVPRW_2022_paper.pdf" target="_blank">[Paper]</a>
-                    <a href="https://arxiv.org/abs/2204.07908" target="_blank">[arXiv]</a>
-                    <a href="https://github.com/caiyuanhao1998/MST-plus-plus" target="_blank">[Code]</a>
-                    <a href="https://openaccess.thecvf.com/content/CVPR2022W/NTIRE/papers/Arad_NTIRE_2022_Spectral_Recovery_Challenge_and_Data_Set_CVPRW_2022_paper.pdf" target="_blank">[Challenge Paper]</a><br>
-                    <em class="blue"><b>Winner of NTIRE 2022 Challenge on Spectral Reconstruction</b></em>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/magid2022texture.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Texture-based Error Analysis for Image Super-Resolution</b><br>
-                    Salma Abdel Magid, <b>Zudi Lin</b>, Donglai Wei, Yulun Zhang, Jinjin Gu and Hanspeter Pfister<br>
-                    <i>Computer Vision and Pattern Recognition (<b>CVPR</b>), 2022</i><br>
-                    <a href="https://openaccess.thecvf.com/content/CVPR2022/papers/Magid_Texture-Based_Error_Analysis_for_Image_Super-Resolution_CVPR_2022_paper.pdf" target="_blank">[Paper]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/wei2022youmvos.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>YouMVOS: An Actor-centric Multi-shot Video Object Segmentation Dataset</b><br>
-                    Donglai Wei, Siddhant Kharbanda, Sarthak Arora, Roshan Roy, Nishant Jain, Akash Palrecha, Tanav
-                    Shah, Shray Mathur, Abhijay Kemkar, Ritik Mathur, Anirudh Chakravarthy, <b>Zudi Lin</b>, Won-Dong
-                    Jang, Yansong Tang, Song Bai, James Tompkin, Philip Torr and Hanspeter Pfister<br>
-                    <i>Computer Vision and Pattern Recognition (<b>CVPR</b>), 2022</i><br>
-                    <a href="https://openaccess.thecvf.com/content/CVPR2022/papers/Wei_YouMVOS_An_Actor-Centric_Multi-Shot_Video_Object_Segmentation_Dataset_CVPR_2022_paper.pdf" target="_blank">[Paper]</a>
-                    <a href="https://donglaiw.github.io/proj/youMVOS/" target="_blank">[Project Page]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/zhao2022discrete.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Discrete Cosine Transform Network for Guided Depth Super-Resolution</b><br>
-                    Zixiang Zhao, Jiangshe Zhang, Shuang Xu, <b>Zudi Lin</b> and Hanspeter Pfister<br>
-                    <i>Computer Vision and Pattern Recognition (<b>CVPR</b>), 2022</i><br>
-                    <a href="https://openaccess.thecvf.com/content/CVPR2022/papers/Zhao_Discrete_Cosine_Transform_Network_for_Guided_Depth_Map_Super-Resolution_CVPR_2022_paper.pdf" target="_blank">[Paper]</a>
-                    <a href="https://arxiv.org/abs/2104.06977" target="_blank">[arXiv]</a>
-                    <a href="https://github.com/Zhaozixiang1228/GDSR-DCTNet" target="_blank">[Code]</a><br>
-                    <em class="blue"><b>Oral Presentation</b></em>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/lin2021pytorch.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>PyTorch Connectomics: A Scalable and Flexible Segmentation Framework for EM Connectomics</b><br>
-                    <b>Zudi Lin</b>, Donglai Wei, Jeff Lichtman and Hanspeter Pfister<br>
-                    <i>arXiv preprint arXiv:2112.05754, 2021</i><br>
-                    <a href="https://arxiv.org/abs/2112.05754" target="_blank">[arXiv]</a>
-                    <a href="https://github.com/zudi-lin/pytorch_connectomics" target="_blank">[Code]</a>
-                    - <span class="fa-regular fa-file-lines" style="display:inline; text-decoration: none; color: #4a4a4a"></span>
-                    <a href="https://connectomics.readthedocs.io/" target="_blank">[Documentation]</a><br>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/magid2021dynamic.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Dynamic High-Pass Filtering and Multi-Spectral Attention for Image Super-Resolution</b><br>
-                    Salma Abdel Magid, Yulun Zhang, Donglai Wei, Won-Dong Jang, <b>Zudi Lin</b>, Yun Fu and Hanspeter Pfister<br>
-                    <i>International Conference on Computer Vision (<b>ICCV</b>), 2021</i><br>
-                    <a href="https://openaccess.thecvf.com/content/ICCV2021/html/Magid_Dynamic_High-Pass_Filtering_and_Multi-Spectral_Attention_for_Image_Super-Resolution_ICCV_2021_paper.html" target="_blank">[Paper]</a>
-                    <a href="https://github.com/sabdelmagid/DFSA_ICCV21" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/yang2021asymmetric.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Asymmetric 3D Context Fusion for Universal Lesion Detection</b><br>
-                    Jiancheng Yang, Yi He, Kaiming Kuang, <b>Zudi Lin</b>, Hanspeter Pfister and Bingbing Ni<br>
-                    <i>Medical Image Computing and Computer Assisted Interventions (<b>MICCAI</b>), 2021</i><br>
-                    <a href="https://link.springer.com/chapter/10.1007/978-3-030-87240-3_55" target="_blank">[Paper]</a>
-                    <a href="https://arxiv.org/abs/2109.08684" target="_blank">[arXiv]</a>
-                    <a href="https://github.com/M3DV/AlignShift" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/lin2021nucmm.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>NucMM Dataset: 3D Neuronal Nuclei Instance Segmentation at Sub-Cubic Millimeter Scale</b><br>
-                    <b>Zudi Lin</b>, Donglai Wei, Mariela D. Petkova, Yuelong Wu, Zergham Ahmed, Krishna Swaroop K, Silin
-                    Zou, Nils Wendt, Jonathan Boulanger-Weill, Xueying Wang, Nagaraju Dhanyasi, Ignacio Arganda-Carreras, 
-                    Florian Engert, Jeff Lichtman and Hanspeter Pfister<br>
-                    <i>Medical Image Computing and Computer Assisted Interventions (<b>MICCAI</b>), 2021</i><br>
-                    <a href="https://link.springer.com/chapter/10.1007/978-3-030-87193-2_16" target="_blank">[Paper]</a>
-                    <a href="https://arxiv.org/abs/2107.05840" target="_blank">[arXiv]</a>
-                    <a href="https://github.com/zudi-lin/pytorch_connectomics/tree/master/configs/NucMM" target="_blank">[Code]</a>
-                    <a href="https://connectomics-bazaar.github.io/proj/nucMM/index.html" target="_blank">[Project Page]</a><br>
-                    <em class="blue"><b>Student Travel Award</b></em>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/wei2021axonem.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>AxonEM Dataset: 3D Axon Instance Segmentation of Brain Cortical Regions</b><br>
-                      Donglai Wei, Kisuk Lee, Hanyu Li, Ran Lu, J. Alexander Bae, Zequan Liu, Lifu Zhang, Márcia
-                      dos Santos, <b>Zudi Lin</b>, Thomas Uram, Xueying Wang, Ignacio Arganda-Carreras, Brian Matejek,
-                      Narayanan Kasthuri, Jeff Lichtman and Hanspeter Pfister<br>
-                    <i>Medical Image Computing and Computer Assisted Interventions (<b>MICCAI</b>), 2021</i><br>
-                    <a href="https://link.springer.com/chapter/10.1007/978-3-030-87193-2_17" target="_blank">[Paper]</a>
-                    <a href="https://arxiv.org/abs/2107.05451" target="_blank">[arXiv]</a>
-                    <a href="https://github.com/donglaiw/AxonEM-challenge" target="_blank">[Code]</a>
-                    <a href="https://connectomics-bazaar.github.io/proj/AxonEM/index.html" target="_blank">[Project Page]</a><br>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/rademacher2021wood.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>The Wood Image Analysis and Dataset (WIAD): Open-access Visual Analysis Tools to Advance the Ecological Data Revolution</b><br>
-                    Tim Rademacher, Bijan Seyednasrollah, David Basler, Jian Cheng, Tessa Mandra, Elise Miller, <b>Zudi Lin</b>, 
-                    David A Orwig, Neil Pederson, Hanspeter Pfister, Andrew D Richardson, Donglai Wei and Li Yao<br>
-                    <i><b>Methods in Ecology and Evolution</b>, 2021</i><br>
-                    <a href="https://besjournals.onlinelibrary.wiley.com/doi/abs/10.1111/2041-210X.13717" target="_blank">[Paper]</a>
-                    <a href="https://www.biorxiv.org/content/10.1101/2020.12.16.423133v2" target="_blank">[bioRxiv]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/lin2020two.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Two-Stream Active Query Suggestion for Active Learning in Connectomics</b><br>
-                    <b>Zudi Lin</b>, Donglai Wei, Won-Dong Jang, Siyan Zhou, Xupeng Chen, Xueying Wang, Richard Schalek, Daniel Berger, Adi Suissa-Peleg, 
-                    Brian Matejek, Lee Kamentsky, Toufiq Parag, Thouis Jones, Daniel Haehn, Jeff Lichtman and Hanspeter Pfister<br>
-                    <i>European Conference on Computer Vision (<b>ECCV</b>), 2020</i><br>
-                    <a href="https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123630103.pdf" target="_blank">[Paper]</a>
-                    <a href="https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123630103-supp.pdf" target="_blank">[Supp.]</a>
-                    <a href="https://github.com/zudi-lin/pytorch_connectomics/blob/master/scripts/tools/two_stream.py" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/wei2020mitoem.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>MitoEM Dataset: Large-scale 3D Mitochondria Instance Segmentation from EM Images</b><br>
-                    Donglai Wei, <b>Zudi Lin</b>, Daniel Barranco, Nils Wendt, Xingyu Liu, Wenjie Yin, Xin Huang, Aarush Gupta, Won-Dong Jang, 
-                    Xueying Wang, Ignacio Arganda-Carreras, Jeff Lichtman, Hanspeter Pfister<br>
-                    <i>Medical Image Computing and Computer Assisted Interventions (<b>MICCAI</b>), 2020</i><br>
-                    <a href="https://link.springer.com/chapter/10.1007/978-3-030-59722-1_7" target="_blank">[Paper]</a>
-                    <a href="https://github.com/zudi-lin/pytorch_connectomics/tree/master/configs/MitoEM" target="_blank">[Code]</a>
-                    <a href="https://connectomics.readthedocs.io/en/latest/tutorials/mito.html" target="_blank">[Tutorial]</a>
-                    - <span class="fa-regular fa-chess-knight" style="display:inline; text-decoration: none; color: #4a4a4a"></span>
-                    <a href="https://mitoem.grand-challenge.org/" target="_blank">[Grand Challenge]</a><br>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/talwar2020topological.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>A Topological Nomenclature for 3D Shape Analysis in Connectomics</b><br>
-                    Abhimanyu Talwar, <b>Zudi Lin</b>, Donglai Wei, Yuesong Wu, Bowen Zheng, Jinglin Zhao, 
-                    Won-Dong Jang, Xueying Wang, Jeff Lichtman, and Hanspeter Pfister<br>
-                    <i>Computer Vision and Pattern Recognition Workshops (<b>CVPRW</b>), 2020</i><br>
-                    <a href="https://openaccess.thecvf.com/content_CVPRW_2020/papers/w57/Talwar_A_Topological_Nomenclature_for_3D_Shape_Analysis_in_Connectomics_CVPRW_2020_paper.pdf" target="_blank">[Paper]</a>
-                    <a href="https://github.com/donglaiw/ibexHelper" target="_blank">[Code]</a><br>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/lin2019white.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>White-Box Adversarial Defense via Self-Supervised Data Estimation</b><br>
-                    <b>Zudi Lin</b>, Hanspeter Pfister and Ziming Zhang<br>
-                    <i>arXiv preprint arXiv:1909.06271, 2019</i><br>
-                    <a href="https://arxiv.org/abs/1909.06271" target="_blank">[arXiv]</a>
-                    <a href="https://github.com/zudi-lin/RIDE" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/dennig2019fdive.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>FDive: Learning Relevance Models using Pattern-based Similarity Measures</b><br>
-                    Frederik Dennig, Tom Polk, <b>Zudi Lin</b>, Tobias Schreck, Hanspeter Pfister, and Michael Behrisch<br>
-                    <i>IEEE Conference on Visual Analytics Science and Technology (<b>VAST</b>), 2019</i><br>
-                    <a href="https://ieeexplore.ieee.org/abstract/document/8986940" target="_blank">[Paper]</a>
-                    <a href="https://arxiv.org/abs/1907.12489" target="_blank">[arXiv]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-            
-            <!--Awards-->
-            <h2 id="awards">Awards</h2>
-            <ul>
-              <li>First Place, CVPR NTIRE Challenge on Spectral Reconstruction. 2022</li>
-              <li>MICCAI Student Travel Award. 2021</li>
-              <li>Award for Distinction in Teaching, Harvard University. 2019</li>
-              <li>Graduate Student Fellowships, Harvard University. 2017-2018</li>
-              <li>Award for Excellence in Research and Innovation, Tsinghua University. 2016</li>
-              <li>Excellent Students Research Training (SRT) Project, Tsinghua University. 2016</li>
-              <li>Tsinghua <i>Xuetang</i> Talents Program Scholarship. 2015-2017</li>
-            </ul>
-
-            <h2 id="services">Services</h2>
-            <ul>
-              <li>Conference and Journal Reviewer,
-                <br>&emsp;Conference on Computer Vision and Pattern Recognition (CVPR) 
-                <br>&emsp;European Conference on Computer Vision (ECCV)
-                <br>&emsp;International Conference on Computer Vision (ICCV)
-                <br>&emsp;Medical Image Computing and Computer Assisted Interventions (MICCAI)
-                <br>&emsp;Winter Conference on Applications of Computer Vision (WACV)
-                <br>&emsp;IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)
-                <br>&emsp;IEEE Transactions on Medical Imaging (TMI)
-                <br>&emsp;IEEE Transactions on Circuits and Systems for Video Technology (TCSVT)
-                <br>&emsp;IEEE Transactions on Computational Imaging (TCI)
-                <br>&emsp;IEEE Journal of Biomedical and Health Informatics (JBHI)
-              <li>Challenge and Workshop Organizer,
-                <br>&emsp;IEEE-ISBI 2021: MitoEM Challenge for 3D Mitochondria Instance Segmentation
-              </li>
-              <li>Associate Director, Social Entrepreneurship Initiative, Harvard GSAS Business Club. 2020-2022</li>
-              <li>Student Committee Member, The Mind Brain Behavior (MBB) Initiative, Harvard University. 2019-2020</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+  <!-- Sidebar -->
+  <aside>
+    <img class="avatar" src="https://avatars.githubusercontent.com/u/00000000?v=4" alt="profile photo" />
+    <div class="name">Guang Yang</div>
+    <div class="role" data-i18n="aside.role">AI &amp; Computer Vision Researcher</div>
+    <div class="badge-open" data-i18n="aside.open">Open to PhD / Intern</div>
+    <div class="links" style="margin-top:16px">
+      <a href="mailto:1023389285@qq.com">📧 <span data-i18n="links.email">Email</span></a>
+      <a href="https://github.com/gyang666" target="_blank">💻 <span data-i18n="links.github">GitHub</span></a>
+      <a href="https://scholar.google.com.hk/citations?user=uzIJ5_EAAAAJ" target="_blank">🎓 <span data-i18n="links.scholar">Google Scholar</span></a>
     </div>
+  </aside>
 
-    <!-- Footer -->
-    <footer class="container">
-      <br><hr>
-      <div class="row" style="text-align: center">
-        © 2022-2025 Zudi Lin
+  <!-- Main content -->
+  <main>
+    <section id="about">
+      <h3 data-i18n="about.h3">About Me</h3>
+      <p data-i18n="about.p1">I am a researcher focusing on <b>image restoration</b>, especially <b>nighttime flare removal</b>.</p>
+      <p data-i18n="about.p2">I received my <b>B.Eng.</b> in the <b>College of Artificial Intelligence, Southwest University, Chongqing, China</b> in <b>Jun 2025</b>.</p>
+      <p data-i18n="about.p3"><b>Academic Service:</b> Reviewer — AAAI Conference on Artificial Intelligence (AAAI); IEEE Transactions on Multimedia (TMM).</p>
+      <p data-i18n="about.p4">I am currently seeking a <b>PhD position (Fall 2026)</b> or a <b>research internship (2025/2026)</b> related to image restoration.</p>
+    </section>
+
+    <section id="education">
+      <h3 data-i18n="education.h3">Education</h3>
+      <div class="card">
+        <b data-i18n="education.school">Southwest University, Chongqing, China</b>
+        <div class="meta" data-i18n="education.meta">B.Eng., Intelligent Science and Technology — Jun 2025</div>
       </div>
-    </footer>
-  </section>
+    </section>
 
+    <section id="publications">
+      <h3 data-i18n="publications.h3">Publications</h3>
+
+      <div class="card">
+        <b>Nighttime Flare Removal via Wavelet-Guided and Gated-Enhanced Spatial-Frequency Fusion Network</b>
+        <div class="badges">
+          <span class="badge" data-i18n="pub1.badge1">Oral</span>
+          <span class="badge" data-i18n="pub1.badge2">Corresponding author</span>
+        </div>
+        <div class="meta">Yun Liu, <b>Guang Yang</b><sup>†</sup>, Tao Li, Weisi Lin</div>
+        <div class="meta" data-i18n="pub1.venue">AAAI Conference on Artificial Intelligence (AAAI 2026 Oral)</div>
+        <div class="btn-row">
+          <a class="btn" href="#" target="_blank" data-i18n="buttons.pdf">PDF</a>
+          <a class="btn" href="#" target="_blank" data-i18n="buttons.code">Code</a>
+        </div>
+        <div class="meta" data-i18n="pub1.fn"><sup>†</sup> Corresponding author</div>
+      </div>
+
+      <div class="card">
+        <b>Dehaze-RetinexGAN: Real-World Image Dehazing via Retinex-based Generative Adversarial Network</b>
+        <div class="badges">
+          <span class="badge" data-i18n="pub2.badge1">Oral</span>
+          <span class="badge" data-i18n="pub2.badge2">Equal contribution</span>
+        </div>
+        <div class="meta">Xinran Wang*, <b>Guang Yang*</b>, Tian Ye, Yun Liu</div>
+        <div class="meta" data-i18n="pub2.venue">AAAI Conference on Artificial Intelligence (AAAI 2025 Oral)</div>
+        <div class="btn-row">
+          <a class="btn" href="https://ojs.aaai.org/index.php/AAAI/article/view/29564" target="_blank" data-i18n="buttons.pdf">PDF</a>
+          <a class="btn" href="https://scholar.google.com/citations?view_op=view_citation&hl=zh-CN&user=uzIJ5_EAAAAJ&citation_for_view=uzIJ5_EAAAAJ:d1gkVwhDpl0C" target="_blank">Google Scholar</a>
+        </div>
+        <div class="meta" data-i18n="pub2.fn">* Equal contribution</div>
+      </div>
+    </section>
+
+    <section id="honors">
+      <h3 data-i18n="honors.h3">Honors</h3>
+      <div class="card">
+        <ul style="margin:0 0 0 18px">
+          <li data-i18n="honors.item1"><b>Lanqiao Cup (Python Division), National Third Prize</b> — nationwide programming contest in China.</li>
+          <li data-i18n="honors.item2"><b>Outstanding Graduate</b>, Southwest University.</li>
+          <li data-i18n="honors.item3">Second-Class Scholarship, Southwest University.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h3 data-i18n="contact.h3">Contact</h3>
+      <div class="card">
+        <div><b data-i18n="contact.emailLabel">Email:</b> <a href="mailto:1023389285@qq.com">1023389285@qq.com</a></div>
+        <div><b data-i18n="contact.githubLabel">GitHub:</b> <a href="https://github.com/gyang666" target="_blank">github.com/gyang666</a></div>
+        <div><b data-i18n="contact.scholarLabel">Google Scholar:</b> <a href="https://scholar.google.com.hk/citations?user=uzIJ5_EAAAAJ" target="_blank" data-i18n="contact.scholarText">Scholar Profile</a></div>
+      </div>
+    </section>
+
+    <footer data-i18n="footer">© 2025 Guang Yang — Powered by GitHub Pages</footer>
+  </main>
 
   <script>
+    // mouse glow tracking (background cursor glow)
+    (function(){
+      const root = document.documentElement;
+      let tx = innerWidth * 0.5;
+      let ty = innerHeight * 0.35;
+      let cx = tx;
+      let cy = ty;
+      const ease = 0.14;
 
-    var $hashList = $('.menu-list a'), offsetList, maxScrollHeight;
-
-    $('#sidebar').on('click', 'a', function(){
-      activate($(this))
-    });
-    
-    $(window).on('resize', debounce(calculateBoundary, 300));
-
-    $(document).on('scroll', debounce(judgeScroll, 300));
-
-    calculateBoundary();
-    judgeScroll();
-    
-    function  calculateBoundary() {
-      offsetList = $hashList.map(function(idx, ele){
-        return $(ele.hash).offset().top
+      addEventListener('pointermove', function (e) {
+        tx = e.clientX;
+        ty = e.clientY;
       });
-      maxScrollHeight = $(document).height() - $(window).height()
-    }
-    
-    function judgeScroll() {
-      var tps = $("html").scrollTop()
-              ? $("html").scrollTop()
-              : $("body").scrollTop(),
-              len = offsetList.length;
-      if(tps >= maxScrollHeight-10){
-        activate($hashList.eq(len-1));
-        return
+
+      addEventListener('resize', function () {
+        tx = Math.min(Math.max(0, tx), innerWidth);
+        ty = Math.min(Math.max(0, ty), innerHeight);
+      });
+
+      (function raf() {
+        cx += (tx - cx) * ease;
+        cy += (ty - cy) * ease;
+        root.style.setProperty('--mx', cx + 'px');
+        root.style.setProperty('--my', cy + 'px');
+        requestAnimationFrame(raf);
+      })();
+    })();
+
+    // ---- i18n dictionary ----
+    const I18N = {
+      en: {
+        meta: { title: 'Guang Yang | AI Researcher — Open to PhD/Intern' },
+        nav: { publications: 'Publications', cv: 'CV', contact: 'Contact' },
+        aside: { role: 'AI & Computer Vision Researcher', open: 'Open to PhD / Intern' },
+        links: { email: 'Email', github: 'GitHub', scholar: 'Google Scholar' },
+        about: {
+          h3: 'About Me',
+          p1: 'I am a researcher focusing on <b>image restoration</b>, especially <b>nighttime flare removal</b>.',
+          p2: 'I received my <b>B.Eng.</b> in the <b>College of Artificial Intelligence, Southwest University, Chongqing, China</b> in <b>Jun 2025</b>.',
+          p3: '<b>Academic Service:</b> Reviewer — AAAI Conference on Artificial Intelligence (AAAI); IEEE Transactions on Multimedia (TMM).',
+          p4: 'I am currently seeking a <b>PhD position (Fall 2026)</b> or a <b>research internship (2025/2026)</b> related to image restoration.'
+        },
+        education: {
+          h3: 'Education',
+          school: 'Southwest University, Chongqing, China',
+          meta: 'B.Eng., Intelligent Science and Technology — Jun 2025'
+        },
+        publications: { h3: 'Publications' },
+        pub1: {
+          badge1: 'Oral',
+          badge2: 'Corresponding author',
+          venue: 'AAAI Conference on Artificial Intelligence (AAAI 2026 Oral)',
+          fn: '<sup>†</sup> Corresponding author'
+        },
+        pub2: {
+          badge1: 'Oral',
+          badge2: 'Equal contribution',
+          venue: 'AAAI Conference on Artificial Intelligence (AAAI 2025 Oral)',
+          fn: '* Equal contribution'
+        },
+        buttons: { pdf: 'PDF', code: 'Code' },
+        honors: {
+          h3: 'Honors',
+          item1: '<b>Lanqiao Cup (Python Division), National Third Prize</b> — nationwide programming contest in China.',
+          item2: '<b>Outstanding Graduate</b>, Southwest University.',
+          item3: 'Second-Class Scholarship, Southwest University.'
+        },
+        contact: {
+          h3: 'Contact',
+          emailLabel: 'Email:',
+          githubLabel: 'GitHub:',
+          scholarLabel: 'Google Scholar:',
+          scholarText: 'Scholar Profile'
+        },
+        footer: '© 2025 Guang Yang — Powered by GitHub Pages'
+      },
+      zh: {
+        meta: { title: 'Guang Yang | 人工智能与计算机视觉研究' },
+        nav: { publications: '论文', cv: '简历', contact: '联系' },
+        aside: { role: '人工智能与计算机视觉研究者', open: '寻求博士 / 实习机会' },
+        links: { email: '邮箱', github: 'GitHub', scholar: '谷歌学术' },
+        about: {
+          h3: '关于我',
+          p1: '我主要从事<b>图像恢复</b>方向的研究，当前聚焦于<b>夜间炫光去除</b>等低水平视觉任务。',
+          p2: '我于<b>2025 年 6 月</b>在<b>西南大学人工智能学院</b>获得<b>工学学士学位</b>。',
+          p3: '<b>学术服务：</b> AAAI 人工智能会议（AAAI）审稿人；IEEE Transactions on Multimedia (TMM) 审稿人。',
+          p4: '目前正在积极申请<b>2026 年秋季入学的博士（PhD）</b>以及<b>2025/2026 年度与图像恢复相关的科研实习机会</b>。'
+        },
+        education: {
+          h3: '教育经历',
+          school: '西南大学，重庆，中国',
+          meta: '工学学士，智能科学与技术专业 — 2025 年 6 月'
+        },
+        publications: { h3: '论文发表' },
+        pub1: {
+          badge1: '口头报告',
+          badge2: '通讯作者',
+          venue: 'AAAI Conference on Artificial Intelligence (AAAI 2026 Oral)',
+          fn: '<sup>†</sup> 通讯作者'
+        },
+        pub2: {
+          badge1: '口头报告',
+          badge2: '共同一作',
+          venue: 'AAAI Conference on Artificial Intelligence (AAAI 2025 Oral)',
+          fn: '* 共同一作'
+        },
+        buttons: { pdf: '论文 PDF', code: '代码' },
+        honors: {
+          h3: '荣誉与奖励',
+          item1: '<b>蓝桥杯（Python 组）全国三等奖</b> — 全国性编程竞赛。',
+          item2: '<b>西南大学优秀毕业生</b>。',
+          item3: '西南大学二等奖学金。'
+        },
+        contact: {
+          h3: '联系方式',
+          emailLabel: '邮箱：',
+          githubLabel: 'GitHub：',
+          scholarLabel: '谷歌学术：',
+          scholarText: '个人主页'
+        },
+        footer: '© 2025 Guang Yang — 托管于 GitHub Pages'
       }
-      for(var i=0; i<len; i++){
-       if(tps+50<offsetList[i]){
-          activate($hashList.eq(Math.max(0,i-1)));
-          return
-        }
+    };
+
+    // ---- language apply helper ----
+    function applyLanguage(lang) {
+      var dict = I18N[lang] || I18N.en;
+
+      // document title
+      if (dict.meta && dict.meta.title) {
+        document.title = dict.meta.title;
       }
-    }
 
-    function activate(ele){
-      $hashList.removeClass('is-active');
-      ele.addClass('is-active');
-    }
-
-    function debounce(fn, delay) {
-      var timeout = null;
-      return function () {
-        var args = arguments;
-        var context = this;
-        if (!timeout) {
-          timeout = setTimeout(function () {
-            timeout = 0;
-            return fn.apply(context, args);
-          }, delay);
+      // all elements with data-i18n
+      var nodes = document.querySelectorAll('[data-i18n]');
+      nodes.forEach(function (el) {
+        var path = el.getAttribute('data-i18n').split('.');
+        var value = dict;
+        for (var i = 0; i < path.length; i++) {
+          if (value && Object.prototype.hasOwnProperty.call(value, path[i])) {
+            value = value[path[i]];
+          } else {
+            value = null;
+            break;
+          }
         }
-      };
+        if (typeof value === 'string') {
+          el.innerHTML = value;
+        }
+      });
     }
 
+    // ---- init language toggle ----
+    (function(){
+      var current = 'en';
+      var toggleBtn = document.getElementById('langToggle');
 
+      function updateToggleLabel() {
+        if (!toggleBtn) return;
+        toggleBtn.textContent = current === 'en' ? '🌐 中文' : '🌐 EN';
+      }
 
+      applyLanguage(current);
+      updateToggleLabel();
+
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', function () {
+          current = current === 'en' ? 'zh' : 'en';
+          applyLanguage(current);
+          updateToggleLabel();
+        });
+      }
+    })();
   </script>
-
-
 </body>
-
 </html>
