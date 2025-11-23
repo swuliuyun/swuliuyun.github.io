@@ -4,6 +4,8 @@ title: "Publications"
 permalink: /publications/
 author_profile: true
 ---
+##  2026
+- **Yun Liu**, G. Yang, T. Li, W. Lin. Nighttime Flare Removal via Wavelet-Guided and Gated-Enhanced Spatial-Frequency Fusion Network. Proceedings of the 40th Annual AAAI Conference on Artificial Intelligence (AAAI). 2026 (CCF-A)
 
 ##  2025
 - E Hu, **Yun Liu***, A. Wang, B. Shiri, W. Ren, W. Lin. Low-Light Image Enhancement Using a Retinex-based Variational Model with Weighted Lp Norm Constraint. IEEE Transactions on Multimedia (T-MM), 2025. (CCF-B, Corresponding author)
